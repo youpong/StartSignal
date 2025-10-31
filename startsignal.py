@@ -2,6 +2,10 @@ from microbit import *
 import time
 import utime
 import random
+import music
+
+LIGHT_INTERVAL = 1000
+GO_WAIT = random.randint(2000, 3000)
 
 class FalseStartError(Exception):
     """A exception for a false start"""
@@ -17,15 +21,17 @@ def start_sequence():
     # Light up first column
     display.set_pixel(0, 3, 9)
     display.set_pixel(0, 4, 9)
+    music.pitch(150, 150)
 
     # Light up the subsequent column
     for seq in range(1, 5):
-        wait_for(1000)
+        wait_for(LIGHT_INTERVAL)
         display.set_pixel(seq, 3, 9)
         display.set_pixel(seq, 4, 9)
+        music.pitch(150, 150)
 
-    # Turn off all columns
-    wait_for(random.randint(1000, 3000))
+    # Lights out
+    wait_for(GO_WAIT)
     display.clear()
 
 while True:
