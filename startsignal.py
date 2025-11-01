@@ -4,8 +4,9 @@ import utime
 import random
 import music
 
+LED_BRIGHTNESS = 5
 LIGHT_INTERVAL = 1000
-GO_WAIT = random.randint(2000, 3000)
+GO_WAIT = lambda: random.randint(2000, 3000)
 
 class FalseStartError(Exception):
     """A exception for a false start"""
@@ -17,23 +18,25 @@ def wait_for(duration_ms):
         if button_a.is_pressed():
             raise FalseStartError()
 
+def light_up(column):
+    display.set_pixel(column, 3, LED_BRIGHTNESS)
+    display.set_pixel(column, 4, LED_BRIGHTNESS)
+    
 def start_sequence():
     display.clear()
     
     # Light up first column
-    display.set_pixel(0, 3, 9)
-    display.set_pixel(0, 4, 9)
+    light_up(0)
     music.pitch(150, 150)
 
     # Light up the subsequent column
     for seq in range(1, 5):
         wait_for(LIGHT_INTERVAL)
-        display.set_pixel(seq, 3, 9)
-        display.set_pixel(seq, 4, 9)
+        light_up(seq)
         music.pitch(150, 150)
 
     # Lights out
-    wait_for(GO_WAIT)
+    wait_for(GO_WAIT())
     display.clear()
 
 while True:
