@@ -12,8 +12,8 @@ class FalseStartError(Exception):
     """A exception for a false start"""
     pass
 
-def wait_for(duration_ms):
-    wait_time = time.ticks_ms() + duration_ms
+def wait_for(start_time, duration_ms):
+    wait_time = start_time + duration_ms
     while wait_time > time.ticks_ms():
         if button_a.is_pressed():
             raise FalseStartError()
@@ -26,17 +26,19 @@ def start_sequence():
     display.clear()
     
     # Light up first column
+    start_time = time.ticks_ms()
     light_up(0)
     music.pitch(150, 150)
 
     # Light up the subsequent column
     for seq in range(1, 5):
-        wait_for(LIGHT_INTERVAL)
+        wait_for(start_time, LIGHT_INTERVAL)
+        start_time = time.ticks_ms()
         light_up(seq)
         music.pitch(150, 150)
 
     # Lights out
-    wait_for(GO_WAIT())
+    wait_for(time.ticks_ms(), GO_WAIT())
     display.clear()
 
 while True:
