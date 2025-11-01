@@ -1,4 +1,4 @@
-from microbit import *
+from microbit import *  # noqa: F401, F403
 import time
 import utime
 import random
