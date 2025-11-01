@@ -18,6 +18,8 @@ def wait_for(duration_ms):
             raise FalseStartError()
 
 def start_sequence():
+    display.clear()
+    
     # Light up first column
     display.set_pixel(0, 3, 9)
     display.set_pixel(0, 4, 9)
@@ -35,16 +37,18 @@ def start_sequence():
     display.clear()
 
 while True:
+    while not pin_logo.is_touched():
+        pass
+
     try:
         start_sequence()
     except FalseStartError as e:
         # display.scroll("False Start")
         display.show(Image.NO)
-        break
+        continue
 
     start_time = time.ticks_ms()
     while not button_a.is_pressed():
         sleep(1)
     reaction_time = utime.ticks_diff(time.ticks_ms(), start_time)
     display.scroll("{:.3f}".format(reaction_time / 1000))
-    break
