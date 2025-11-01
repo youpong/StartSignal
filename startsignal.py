@@ -1,6 +1,5 @@
 from microbit import *  # noqa: F401, F403
 import time
-import utime
 import random
 import music
 
@@ -21,7 +20,7 @@ def wait_until(target):
     while target > time.ticks_ms():
         if button_a.is_pressed():
             raise FalseStartError()
-        utime.sleep_ms(1)
+        time.sleep_ms(1)
 
 
 def light_up(column):
@@ -61,6 +60,6 @@ while True:
 
     start_time = time.ticks_ms()
     while not button_a.is_pressed():
-        utime.sleep_ms(1)
-    reaction_time = utime.ticks_diff(time.ticks_ms(), start_time)
+        time.sleep_ms(1)
+    reaction_time = time.ticks_diff(time.ticks_ms(), start_time)
     display.scroll("{:.3f}".format(reaction_time / 1000))
