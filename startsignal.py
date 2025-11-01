@@ -17,7 +17,7 @@ def go_wait() -> None:
 
 
 def wait_for(duration) -> None:
-    wait_time = time.ticks_ms() + duration 
+    wait_time = time.ticks_ms() + duration
     while wait_time > time.ticks_ms():
         if button_a.is_pressed():
             raise FalseStartError()
@@ -40,7 +40,7 @@ def start_sequence() -> None:
     for seq in range(1, 5):
         wait_for(LIGHT_INTERVAL)
         light_up(seq)
-        
+
     # Lights out
     wait_for(go_wait())
     display.clear()
