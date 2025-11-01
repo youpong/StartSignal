@@ -6,11 +6,16 @@ import music
 
 LED_BRIGHTNESS = 5
 LIGHT_INTERVAL = 1000
-GO_WAIT = lambda: random.randint(2000, 3000)
+
 
 class FalseStartError(Exception):
     """A exception for a false start"""
     pass
+
+
+def go_wait():
+    return random.randint(2000, 3000)
+
 
 def wait_until(target):
     while target > time.ticks_ms():
@@ -18,13 +23,15 @@ def wait_until(target):
             raise FalseStartError()
         utime.sleep_ms(1)
 
+
 def light_up(column):
     display.set_pixel(column, 3, LED_BRIGHTNESS)
     display.set_pixel(column, 4, LED_BRIGHTNESS)
 
+
 def start_sequence():
     display.clear()
-    
+
     # Light up first column
     start_time = time.ticks_ms()
     light_up(0)
@@ -38,7 +45,7 @@ def start_sequence():
         music.pitch(150, 150)
 
     # Lights out
-    wait_until(time.ticks_ms() + GO_WAIT())
+    wait_until(time.ticks_ms() + go_wait())
     display.clear()
 
 
