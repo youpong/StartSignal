@@ -12,12 +12,11 @@ class FalseStartError(Exception):
     """A exception for a false start"""
     pass
 
-def wait_for(start_time, duration_ms):
-    wait_time = start_time + duration_ms
-    while wait_time > time.ticks_ms():
+def wait_until(target):
+    while target > time.ticks_ms():
         if button_a.is_pressed():
             raise FalseStartError()
-        sleep(1)
+        utime.sleep_ms(1)
 
 def light_up(column):
     display.set_pixel(column, 3, LED_BRIGHTNESS)
@@ -33,13 +32,13 @@ def start_sequence():
 
     # Light up the subsequent column
     for seq in range(1, 5):
-        wait_for(start_time, LIGHT_INTERVAL)
+        wait_until(start_time + LIGHT_INTERVAL)
         start_time = time.ticks_ms()
         light_up(seq)
         music.pitch(150, 150)
 
     # Lights out
-    wait_for(time.ticks_ms(), GO_WAIT())
+    wait_until(time.ticks_ms() + GO_WAIT())
     display.clear()
 
 while True:
@@ -55,6 +54,6 @@ while True:
 
     start_time = time.ticks_ms()
     while not button_a.is_pressed():
-        sleep(1)
+        utime.sleep_ms(1)
     reaction_time = utime.ticks_diff(time.ticks_ms(), start_time)
     display.scroll("{:.3f}".format(reaction_time / 1000))
