@@ -17,6 +17,7 @@ def wait_for(start_time, duration_ms):
     while wait_time > time.ticks_ms():
         if button_a.is_pressed():
             raise FalseStartError()
+        sleep(1)
 
 def light_up(column):
     display.set_pixel(column, 3, LED_BRIGHTNESS)
