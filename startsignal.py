@@ -16,8 +16,9 @@ def go_wait():
     return random.randint(2000, 3000)
 
 
-def wait_until(target):
-    while target > time.ticks_ms():
+def wait_for(duration):
+    wait_time = time.ticks_ms() + duration 
+    while wait_time > time.ticks_ms():
         if button_a.is_pressed():
             raise FalseStartError()
         time.sleep_ms(1)
@@ -26,25 +27,21 @@ def wait_until(target):
 def light_up(column):
     display.set_pixel(column, 3, LED_BRIGHTNESS)
     display.set_pixel(column, 4, LED_BRIGHTNESS)
-
+    music.pitch(150, 150, wait=False)
 
 def start_sequence():
     display.clear()
 
     # Light up first column
-    start_time = time.ticks_ms()
     light_up(0)
-    music.pitch(150, 150)
 
     # Light up the subsequent column
     for seq in range(1, 5):
-        wait_until(start_time + LIGHT_INTERVAL)
-        start_time = time.ticks_ms()
+        wait_for(LIGHT_INTERVAL)
         light_up(seq)
-        music.pitch(150, 150)
-
+        
     # Lights out
-    wait_until(time.ticks_ms() + go_wait())
+    wait_for(go_wait())
     display.clear()
 
 
