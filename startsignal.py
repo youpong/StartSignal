@@ -21,7 +21,7 @@ def wait_until(target):
 def light_up(column):
     display.set_pixel(column, 3, LED_BRIGHTNESS)
     display.set_pixel(column, 4, LED_BRIGHTNESS)
-    
+
 def start_sequence():
     display.clear()
     
@@ -41,14 +41,14 @@ def start_sequence():
     wait_until(time.ticks_ms() + GO_WAIT())
     display.clear()
 
+
 while True:
     while not pin_logo.is_touched():
         pass
 
     try:
         start_sequence()
-    except FalseStartError as e:
-        # display.scroll("False Start")
+    except FalseStartError:
         display.show(Image.NO)
         continue
 
