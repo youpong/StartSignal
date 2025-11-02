@@ -1,4 +1,7 @@
 class Display:
+    def set_pixel(self, x: int, y: int, value: int) -> None: ...
+    def clear(self) -> None: ...
+
     def show(self,
              image: Image,
              delay: int = 400,

@@ -12,11 +12,11 @@ class FalseStartError(Exception):
     pass
 
 
-def go_wait() -> None:
+def go_wait() -> int:
     return random.randint(2000, 3000)
 
 
-def wait_for(duration) -> None:
+def wait_for(duration: int) -> None:
     wait_time = time.ticks_ms() + duration
     while wait_time > time.ticks_ms():
         if button_a.is_pressed():
@@ -33,12 +33,10 @@ def light_up(column) -> None:
 def start_sequence() -> None:
     display.clear()
 
-    # Light up first column
-    light_up(0)
-
     # Light up the subsequent column
-    for seq in range(1, 5):
-        wait_for(LIGHT_INTERVAL)
+    for seq in range(5):
+        if seq != 0:
+            wait_for(LIGHT_INTERVAL)
         light_up(seq)
 
     # Lights out
