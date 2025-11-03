@@ -2,18 +2,8 @@
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
-
     "python.linting.flake8Args": [
         "--config=.flake8"
-    ],
-
-    // 保存時に自動修正（autopep8）
-    // "python.linting.lintOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit"
-    },
-    "python.analysis.extraPaths": [
-        "./stubs"
     ],
     "python.terminal.activateEnvironment": true, 
     "python.terminal.activateEnvInCurrentTerminal": true
