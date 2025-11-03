@@ -7,50 +7,58 @@ LED_BRIGHTNESS = 5
 LIGHT_INTERVAL = 1000
 
 
-class FalseStartError(Exception):
-    """A exception for a false start"""
-    pass
-
-
-def go_wait() -> int:
+def go_wait():
     return random.randint(2000, 3000)
 
 
-def wait_for(duration: int) -> None:
+def wait_for(duration):
+    """
+    wait for duration(ms) time
+
+    Returns:
+        False: Jump Start
+    """
     wait_time = time.ticks_ms() + duration
     while wait_time > time.ticks_ms():
         if button_a.is_pressed():
-            raise FalseStartError()
+            return False
         time.sleep_ms(1)
+    return True
 
 
-def light_up(column) -> None:
+def light_up(column):
     display.set_pixel(column, 3, LED_BRIGHTNESS)
     display.set_pixel(column, 4, LED_BRIGHTNESS)
     music.pitch(150, 150, wait=False)
 
 
-def start_sequence() -> None:
+def start_sequence():
+    """
+    Returns:
+        False:
+            Jump Start
+    """
     display.clear()
 
     # Light up the subsequent column
     for seq in range(5):
-        if seq != 0:
-            wait_for(LIGHT_INTERVAL)
+        if seq != 0 and not wait_for(LIGHT_INTERVAL):
+            return False
         light_up(seq)
 
     # Lights out
-    wait_for(go_wait())
+    if not wait_for(go_wait()):
+        return False
     display.clear()
+    return True
 
 
+# Main routine
 while True:
     while not pin_logo.is_touched():
-        pass
+        time.sleep_ms(1)
 
-    try:
-        start_sequence()
-    except FalseStartError:
+    if not start_sequence():
         display.show(Image.NO)
         continue
 
