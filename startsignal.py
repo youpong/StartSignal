@@ -66,4 +66,4 @@ while True:
     while not button_a.is_pressed():
         time.sleep_ms(1)
     reaction_time = time.ticks_diff(time.ticks_ms(), start_time)
-    display.scroll("{:.3f}".format(reaction_time / 1000))
+    display.scroll("{:.3f}".format(reaction_time / 1000.0))
