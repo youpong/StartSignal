@@ -3,7 +3,7 @@ A micro:bit project — a reaction time measurement app inspired by the F1 start
 
 ## Development Environment
 This program runs in MicroPython within the [micro:bit Python Editor](https://python.microbit.org/v/3).
-(Not tested in Python within the [MakeCode Python editor](https://makecode.microbit.org/#editor))
+(Not tested in Python within the [MakeCode editor](https://makecode.microbit.org/#editor))
 
 ## Setting up a Python Development Environment
 
