@@ -40,3 +40,7 @@ $ flake8 source_files...
 ## References
 * https://github.com/youpong/StartSignaljs ported to JavaScript(TypeScript).
 * https://github.com/youpong/StartSignal-Duel for two players.
+
+## License
+
+MIT
