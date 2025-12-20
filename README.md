@@ -32,6 +32,11 @@ $ pip install --upgrade pip
 $ pip install -r requirements-dev.txt
 ```
 
+### format source files
+```bash
+$ black source_files...
+```
+
 ### Linting source files
 ```bash
 $ flake8 source_files...
