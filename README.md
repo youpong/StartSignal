@@ -32,14 +32,19 @@ $ pip install --upgrade pip
 $ pip install -r requirements-dev.txt
 ```
 
-### format source files
+### Format source files
 ```bash
-$ black source_files...
+$ black [FILES]...
 ```
 
 ### Linting source files
 ```bash
-$ flake8 source_files...
+$ ruff check [FILES]...
+```
+
+### Check static type on source files
+```bash
+$ mypy [FILES]...
 ```
 
 ## References
