@@ -87,11 +87,15 @@ def run_game():
     return time.ticks_diff(time.ticks_ms(), start_time)  # type: ignore[attr-defined]
 
 
-# Main routine
-while True:
-    while not mb.pin_logo.is_touched():
-        time.sleep_ms(1)  # type: ignore[attr-defined]
+def main() -> None:
+    while True:
+        while not mb.pin_logo.is_touched():
+            time.sleep_ms(1)  # type: ignore[attr-defined]
 
-    reaction_time = run_game()
-    if reaction_time is not None:
-        mb.display.scroll("{:.3f}".format(reaction_time / 1000.0))
+        reaction_time = run_game()
+        if reaction_time is not None:
+            mb.display.scroll("{:.3f}".format(reaction_time / 1000.0))
+
+
+if __name__ == "__main__":
+    main()
