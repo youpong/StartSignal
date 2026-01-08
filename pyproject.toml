@@ -2,7 +2,7 @@
 ignore_missing_imports = false
 
 [[tool.mypy.overrides]]
-module = ["microbit", "time", "music"]
+module = ["microbit", "time", "random", "music"]
 ignore_missing_imports = true
 
 # [tool.flake8]

@@ -1,4 +1,4 @@
-import microbit
+import microbit as mb
 import time
 import random
 import music
@@ -20,15 +20,15 @@ def wait_for(duration):
     """
     wait_time = time.ticks_ms() + duration
     while wait_time > time.ticks_ms():
-        if microbit.button_a.is_pressed():
+        if mb.button_a.is_pressed():
             return False
         time.sleep_ms(1)
     return True
 
 
 def light_up(column):
-    microbit.display.set_pixel(column, 3, LED_BRIGHTNESS)
-    microbit.display.set_pixel(column, 4, LED_BRIGHTNESS)
+    mb.display.set_pixel(column, 3, LED_BRIGHTNESS)
+    mb.display.set_pixel(column, 4, LED_BRIGHTNESS)
     music.pitch(150, 150, wait=False)
 
 
@@ -38,7 +38,7 @@ def start_sequence():
         False:
             Jump Start
     """
-    microbit.display.clear()
+    mb.display.clear()
 
     # Light up the subsequent column
     for seq in range(5):
@@ -49,26 +49,26 @@ def start_sequence():
     # Lights out
     if not wait_for(go_wait()):
         return False
-    microbit.display.clear()
+    mb.display.clear()
     return True
 
 
 def run_game():
     if not start_sequence():
-        microbit.display.show(microbit.Image.NO)
+        mb.display.show(mb.Image.NO)
         return None
 
     start_time = time.ticks_ms()
-    while not microbit.button_a.is_pressed():
+    while not mb.button_a.is_pressed():
         time.sleep_ms(1)
     return time.ticks_diff(time.ticks_ms(), start_time)
 
 
 # Main routine
 while True:
-    while not microbit.pin_logo.is_touched():
+    while not mb.pin_logo.is_touched():
         time.sleep_ms(1)  # type: ignore
 
     reaction_time = run_game()
     if reaction_time is not None:
-        microbit.display.scroll("{:.3f}".format(reaction_time / 1000.0))
+        mb.display.scroll("{:.3f}".format(reaction_time / 1000.0))
