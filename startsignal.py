@@ -60,14 +60,14 @@ def run_game():
 
     start_time = time.ticks_ms()
     while not mb.button_a.is_pressed():
-        time.sleep_ms(1)
+        time.sleep_ms(1)  # type: ignore[attr-defined]
     return time.ticks_diff(time.ticks_ms(), start_time)
 
 
 # Main routine
 while True:
     while not mb.pin_logo.is_touched():
-        time.sleep_ms(1)  # type: ignore
+        time.sleep_ms(1)  # type: ignore[attr-defined]
 
     reaction_time = run_game()
     if reaction_time is not None:
