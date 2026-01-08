@@ -3,40 +3,56 @@ import time
 import random
 import music
 
-LED_BRIGHTNESS = 5
-LIGHT_INTERVAL = 1000
+LED_BRIGHTNESS: int = 5
+LIGHT_INTERVAL: int = 1000
 
 
-def go_wait():
+def go_wait() -> int:
+    """
+    Generate random wait time before light out.
+    
+    Returns:
+        Random wait time between 2000-3000ms
+    """
     return random.randint(2000, 3000)
 
 
-def wait_for(duration):
+def wait_for(duration: int) -> bool:
     """
-    wait for duration(ms) time
+    Wait for duration(ms) time.
+
+    Args:
+        duration: Wait time(ms)
 
     Returns:
-        False: Jump Start
+        False if jump start detected, True otherwise
     """
-    wait_time = time.ticks_ms() + duration
-    while wait_time > time.ticks_ms():
+    wait_time = time.ticks_ms() + duration  # type: ignore[attr-defined]
+    while wait_time > time.ticks_ms():  # type: ignore[attr-defined]
         if mb.button_a.is_pressed():
             return False
-        time.sleep_ms(1)
+        time.sleep_ms(1)  # type: ignore[attr-defined]
     return True
 
 
-def light_up(column):
+def light_up(column: int) -> None:
+    """
+    Light up LEDs in specified column.
+
+    Args:
+        column: Column index (0-4)
+    """
     mb.display.set_pixel(column, 3, LED_BRIGHTNESS)
     mb.display.set_pixel(column, 4, LED_BRIGHTNESS)
     music.pitch(150, 150, wait=False)
 
 
-def start_sequence():
+def start_sequence() -> bool:
     """
+    Execute the start light sequence.
+
     Returns:
-        False:
-            Jump Start
+        False if jump start detected, True otherwise
     """
     mb.display.clear()
 
@@ -54,14 +70,21 @@ def start_sequence():
 
 
 def run_game():
+    # type: () -> int | None
+    """
+    Run one game cycle.
+
+    Returns:
+        Reaction time in ms, or None if jump start
+    """
     if not start_sequence():
         mb.display.show(mb.Image.NO)
         return None
 
-    start_time = time.ticks_ms()
+    start_time = time.ticks_ms()  # type: ignore[attr-defined]
     while not mb.button_a.is_pressed():
         time.sleep_ms(1)  # type: ignore[attr-defined]
-    return time.ticks_diff(time.ticks_ms(), start_time)
+    return time.ticks_diff(time.ticks_ms(), start_time)  # type: ignore[attr-defined]
 
 
 # Main routine
