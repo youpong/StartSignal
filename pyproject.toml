@@ -1,0 +1,12 @@
+[tool.mypy]
+ignore_missing_imports = false
+
+[[tool.mypy.overrides]]
+module = ["microbit", "time", "music"]
+ignore_missing_imports = true
+
+# [tool.flake8]
+# per-file-ignores = [
+#    "__init__.py:F401",
+#    "startsignal.py:F401,F403"
+# ]
