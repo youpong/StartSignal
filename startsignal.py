@@ -53,17 +53,22 @@ def start_sequence():
     return True
 
 
+def run_game():
+    if not start_sequence():
+        display.show(Image.NO)
+        return None
+
+    start_time = time.ticks_ms()
+    while not button_a.is_pressed():
+        time.sleep_ms(1)
+    return time.ticks_diff(time.ticks_ms(), start_time)
+
+
 # Main routine
 while True:
     while not pin_logo.is_touched():
         time.sleep_ms(1)
 
-    if not start_sequence():
-        display.show(Image.NO)
-        continue
-
-    start_time = time.ticks_ms()
-    while not button_a.is_pressed():
-        time.sleep_ms(1)
-    reaction_time = time.ticks_diff(time.ticks_ms(), start_time)
-    display.scroll("{:.3f}".format(reaction_time / 1000.0))
+    reaction_time = run_game()
+    if reaction_time is not None:
+        display.scroll("{:.3f}".format(reaction_time / 1000.0))
