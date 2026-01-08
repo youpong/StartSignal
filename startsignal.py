@@ -10,7 +10,7 @@ LIGHT_INTERVAL: int = 1000
 def go_wait() -> int:
     """
     Generate random wait time before light out.
-    
+
     Returns:
         Random wait time between 2000-3000ms
     """
