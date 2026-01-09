@@ -1,4 +1,4 @@
-name: Deploy Documentation
+name: Deploy Documentation to GitHub Pages
 
 on:
   push:
@@ -6,25 +6,27 @@ on:
       - main  # Set this to your default branch
     workflow_dispatch:      
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 # auto-cancel previous runs
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
-
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.14'
+          python-version: '3.13'
 
       - name: Install dependencies
         run: |
@@ -34,8 +36,25 @@ jobs:
 #      - name: Copy files to docs
 #        run: cp README.md DEVELOPMENT.md reference.md docs/
 
-      - name: Build and Deploy to GitHub Pages
+      - name: Build MkDocs
         run: |
-          # This command builds the site and pushes it to the gh-pages branch
-          mkdocs gh-deploy
-          # --force
+          mkdocs build
+          # --strict
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
