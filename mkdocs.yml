@@ -1,0 +1,14 @@
+site_name: StartSignal
+
+theme:
+  name: material
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: .
+nav:
+  - Readme: README.md
+  - Development note: DEVELOPMENT.md
+  - API Reference: reference.md
