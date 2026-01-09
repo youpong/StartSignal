@@ -35,8 +35,7 @@ jobs:
 
       - name: Copy files to docs
         run: |
-          mkdir docs
-          cp README.md DEVELOPMENT.md reference.md docs
+          cp README.md DEVELOPMENT.md docs
 
       - name: Build MkDocs
         run: |
