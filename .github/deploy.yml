@@ -6,6 +6,11 @@ on:
       - main  # Set this to your default branch
     workflow_dispatch:      
 
+# auto-cancel previous runs
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
