@@ -1,6 +1,8 @@
-name: black code formatter
+name: code format check with Black
 
-on: [push]
+on:
+  push:
+  pull_request:
 
 jobs:
   build:
@@ -17,6 +19,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements-dev.txt
-    - name: code format with black
+    - name: code format check with black(check only)
       run: |
-        black $(git ls-files '*.py')
+        black --check $(git ls-files '*.py')
