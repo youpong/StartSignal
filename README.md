@@ -6,12 +6,18 @@ the start signal.
 
 ![sample screen](./screen.webp)
 
+## Prerequisites
+
+* PC/Mac
+* micro:bit
+* USB cable to connect the micro:bit to your PC/Mac.
+
 ## Upload to micro:bit
 
-1. Copy and paste `startsignal.py` into the [micro:bit
+1. Connect the micro:bit to your PC/Mac using a USB cable.
+2. Copy and paste `startsignal.py` into the [micro:bit
    Python Editor](https://python.microbit.org/v/3).
-2. Click the **"Send to micro:bit"** button.
-
+3. Click the **"Send to micro:bit"** button.
 
 ## How to Play
 
