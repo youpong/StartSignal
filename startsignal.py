@@ -69,17 +69,16 @@ def start_sequence() -> bool:
     return True
 
 
-def run_game():
-    # type: () -> int | None
+def run_game() -> int:
     """
     Run one game cycle.
 
     Returns:
-        Reaction time in ms, or None if jump start
+        Reaction time in ms, or negative value if a jump start detected.
     """
     if not start_sequence():
         mb.display.show(mb.Image.NO)
-        return None
+        return -1
 
     start_time = time.ticks_ms()  # type: ignore[attr-defined]
     while not mb.button_a.is_pressed():
@@ -93,7 +92,7 @@ def main() -> None:
             time.sleep_ms(1)  # type: ignore[attr-defined]
 
         reaction_time = run_game()
-        if reaction_time is not None:
+        if reaction_time >= 0:
             mb.display.scroll("{:.3f}".format(reaction_time / 1000.0))
 
 
