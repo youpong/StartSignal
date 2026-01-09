@@ -36,7 +36,7 @@ jobs:
 
       - name: Copy files to docs
         run: |
-          cp README.md DEVELOPMENT.md screen.png docs
+          cp README.md DEVELOPMENT.md screen.webp docs
 
       - name: Build MkDocs
         run: |
