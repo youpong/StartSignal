@@ -35,12 +35,11 @@ jobs:
 
       - name: Copy files to docs
         run: |
-          cp README.md DEVELOPMENT.md docs
+          cp README.md DEVELOPMENT.md screen.png docs
 
       - name: Build MkDocs
         run: |
-          mkdocs build
-          # --strict
+          mkdocs build --strict
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
