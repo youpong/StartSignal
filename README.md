@@ -5,6 +5,15 @@ the start signal.
 
 ![sample screen](./screen.webp)
 
+## How to Play
+
+1. Touch the Logo pin to start the game.
+2. The LEDs will light up one by one from left to right. Once all five columns
+   are lit, they will turn off.
+3. Press Button A as soon as the lights go out.
+4. Your reaction time will be displayed on the screen.
+5. Touch the Logo pin again to restart the game.
+
 ## Development Environment
 This program runs in MicroPython within the 
 [micro:bit Python Editor](https://python.microbit.org/v/3). (Not tested in 
