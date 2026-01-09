@@ -31,8 +31,8 @@ the start signal.
 ## Development Environment
 
 This program runs in MicroPython within the [micro:bit Python 
-Editor](https://python.microbit.org/v/3). (Not tested in Python within the [MakeCode
-editor](https://makecode.microbit.org/#editor))
+Editor](https://python.microbit.org/v/3). (Not tested in Python within the
+[MakeCode editor](https://makecode.microbit.org/#editor))
 
 ## Setting up a Python Development Environment
 
