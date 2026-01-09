@@ -3,7 +3,7 @@ A BBC micro:bit project — a reaction time measurement app inspired by the F1
 start signal, five lights illuminate in sequence; when the lights out, it's 
 the start signal.
 
-![sample screen](./screen.png)
+![sample screen](./screen.mov)
 
 ## Development Environment
 This program runs in MicroPython within the 
